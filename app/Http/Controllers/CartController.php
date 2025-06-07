@@ -135,7 +135,7 @@ public function place_an_order(Request $request)
         $request->validate([                
             'name' => 'required|max:100',
             'phone' => 'required|numeric|digits:10',
-            'zip' => 'required|numeric|digits:6',
+            'zip' => 'required|numeric|digits:5',
             'state' => 'required',
             'city' => 'required',
             'address' => 'required',
@@ -143,7 +143,11 @@ public function place_an_order(Request $request)
             'landmark' => 'required',           
         ]);
         $address = new Address();        
-        $address->name = $request->name;        $address->city = $request->city;
+        $address->name = $request->name; 
+        $address->phone = $request->phone;
+        $address->zip = $request->zip;
+        $address->state = $request->state;
+        $address->city = $request->city;
         $address->address = $request->address;
         $address->locality = $request->locality;
         $address->landmark = $request->landmark;
@@ -217,6 +221,8 @@ public function place_an_order(Request $request)
 
 
 
+
+ 
 
 
 public function setAmountForCheckout()

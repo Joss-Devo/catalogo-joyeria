@@ -33,10 +33,10 @@
                 <div class="wg-filter flex-grow">
                     <form class="form-search">
                         <fieldset class="name">
-                            <input type="text" placeholder="Search here..." class="" name="name" tabindex="2" value="" aria-required="true" required="">
+                     <!--       <input type="text" placeholder="Search here..." class="" name="name" tabindex="2" value="" aria-required="true" required=""> -->
                         </fieldset>
                         <div class="button-submit">
-                            <button class="" type="submit"><i class="icon-search"></i></button>
+                       <!--     <button class="" type="submit"><i class="icon-search"></i></button> -->
                         </div>
                     </form>
                 </div>                
@@ -46,16 +46,16 @@
                     <table class="table table-striped table-bordered">
                         <thead>
                             <tr>
-                                <th style="width: 80px">Order No</th>
-                                <th>Name</th>
-                                <th class="text-center">Phone</th>
+                                <th style="width: 80px">Numero de Orden</th>
+                                <th>Nombre</th>
+                                <th class="text-center">Mobil</th>
                                 <th class="text-center">Subtotal</th>
-                                <th class="text-center">Tax</th>
+                                <th class="text-center">IVA</th>
                                 <th class="text-center">Total</th>
                                 <th class="text-center">Status</th>
-                                <th class="text-center">Order Date</th>
-                                <th class="text-center">Total Items</th>
-                                <th class="text-center">Delivered On</th>
+                                <th class="text-center">Fecha</th>
+                                <th class="text-center">Total de Articulos</th>
+                                <th class="text-center">Entrega</th>
                                 <th></th>
                             </tr>
                         </thead>

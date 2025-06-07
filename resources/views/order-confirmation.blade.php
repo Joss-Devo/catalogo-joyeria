@@ -3,27 +3,27 @@
 <main class="pt-90">
     <div class="mb-4 pb-4"></div>
     <section class="shop-checkout container">
-      <h2 class="page-title">Order Received</h2>
+      <h2 class="page-title">Orden recibida</h2>
       <div class="checkout-steps">
         <a href="javascript:void(0)" class="checkout-steps__item active">
           <span class="checkout-steps__item-number">01</span>
           <span class="checkout-steps__item-title">
-            <span>Shopping Bag</span>
-            <em>Manage Your Items List</em>
+            <span>Bolsa de compras</span>
+            <em>Gestiona tu lista de artículos</em>
           </span>
         </a>
         <a href="javascript:void(0)" class="checkout-steps__item active">
           <span class="checkout-steps__item-number">02</span>
           <span class="checkout-steps__item-title">
-            <span>Shipping and Checkout</span>
-            <em>Checkout Your Items List</em>
+            <span>Pago & Envío</span>
+            <em>Finaliza tu lista de artículos</em>
           </span>
         </a>
         <a href="javascript:void(0)" class="checkout-steps__item active">
           <span class="checkout-steps__item-number">03</span>
           <span class="checkout-steps__item-title">
-            <span>Confirmation</span>
-            <em>Review And Submit Your Order</em>
+            <span>Confirmación</span>
+            <em>Revisa y envía tu pedido</em>
           </span>
         </a>
       </div>
@@ -40,11 +40,11 @@
         </div>
         <div class="order-info">
           <div class="order-info__item">
-            <label>Order Number</label>
+            <label>Numero de Pedido</label>
             <span>{{$order->id}}</span>
           </div>
           <div class="order-info__item">
-            <label>Date</label>
+            <label>Fecha</label>
             <span>{{$order->created_at}}</span>
           </div>
           <div class="order-info__item">
@@ -52,7 +52,7 @@
             <span>${{$order->total}}</span>
           </div>
           <div class="order-info__item">
-            <label>Payment Method</label>
+            <label>Metodo de Pago</label>
             <span>{{$order->transaction->mode}}</span>
           </div>
         </div>
@@ -95,7 +95,7 @@
                   <td class="text-right">Gratis</td>
                 </tr>
                 <tr>
-                  <th>VAT</th>
+                  <th>IVA</th>
                   <td class="text-right">${{$order->tax}}</td>
                 </tr>
                 <tr>

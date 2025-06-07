@@ -7,7 +7,7 @@
       <ul class="nav nav-tabs mb-5" id="login_register" role="tablist">
         <li class="nav-item" role="presentation">
           <a class="nav-link nav-link_underscore active" id="login-tab" data-bs-toggle="tab" href="#tab-item-login"
-            role="tab" aria-controls="tab-item-login" aria-selected="true">Login</a>
+            role="tab" aria-controls="tab-item-login" aria-selected="true">Bienvenido </a>
         </li>
       </ul>
       <div class="tab-content pt-2" id="login_register_tab_content">
@@ -37,7 +37,7 @@
                 @enderror
               </div>
 
-              <button class="btn btn-primary w-100 text-uppercase" type="submit">Log In</button>
+              <button class="btn btn-primary w-100 text-uppercase" type="submit">Iniciar Sesión</button>
 
               <div class="customer-option mt-4 text-center">
                 <span class="text-secondary">¿Aún no tienes cuenta?</span>

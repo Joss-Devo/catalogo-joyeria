@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'Joyería') }}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta http-equiv="content-type" content="text/html; charset=utf-8" />
   <meta name="author" content="surfside media" />
@@ -81,17 +81,17 @@
                                 <li class="menu-item has-children">
                                     <a href="javascript:void(0);" class="menu-item-button">
                                         <div class="icon"><i class="icon-layers"></i></div>
-                                        <div class="text">Brand</div>
+                                        <div class="text">Marca</div>
                                     </a>
                                     <ul class="sub-menu">
                                         <li class="sub-menu-item">
                                             <a href="{{route('admin.brand.add')}}" class="">
-                                                <div class="text">Nuevo Brand</div>
+                                                <div class="text">Nueva Marca</div>
                                             </a>
                                         </li>
                                         <li class="sub-menu-item">
                                             <a href="{{route('admin.brands')}}" class="">
-                                                <div class="text">Brands</div>
+                                                <div class="text">Marcas</div>
                                             </a>
                                         </li>
                                     </ul>
@@ -118,12 +118,12 @@
                                 <li class="menu-item has-children">
                                     <a href="javascript:void(0);" class="menu-item-button">
                                         <div class="icon"><i class="icon-file-plus"></i></div>
-                                        <div class="text">Order</div>
+                                        <div class="text">Orden</div>
                                     </a>
                                     <ul class="sub-menu">
                                         <li class="sub-menu-item">
                                             <a href="{{route('admin.orders')}}" class="">
-                                                <div class="text">Orders</div>
+                                                <div class="text">Ordenes</div>
                                             </a>
                                         </li>
                                         <li class="sub-menu-item">
@@ -133,7 +133,7 @@
                                         </li>
                                     </ul>
                                 </li>
-                                <li class="menu-item">
+                        <!--     <li class="menu-item">
                                     <a href="slider.html" class="">
                                         <div class="icon"><i class="icon-image"></i></div>
                                         <div class="text">Slider</div>
@@ -144,28 +144,28 @@
                                         <div class="icon"><i class="icon-grid"></i></div> 
                                         <div class="text">Coupns</div>
                                     </a>
-                                </li>
+                                </li> -->
 
                                 <li class="menu-item">
-                                    <a href="users.html" class="">
+                                    <a href="{{route('admin.users')}}" class="">
                                         <div class="icon"><i class="icon-user"></i></div>
-                                        <div class="text">User</div>
+                                        <div class="text">Usuarios</div>
                                     </a>
                                 </li>
 
-                                <li class="menu-item">
+                            <!--   <li class="menu-item">
                                     <a href="settings.html" class="">
                                         <div class="icon"><i class="icon-settings"></i></div>
                                         <div class="text">Settings</div>
                                     </a>
-                                </li>
+                                </li> -->
                                 
                                 <li class="menu-item">
-                                    <form method="POST" action="{{route('logout')}}" id="logout-form"> 
+                                    <form method="POST" action="{{route('logout')}}" id="logout-form">
                                         @csrf
                                     <a href="{{route('logout')}}" class="" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
                                         <div class="icon"><i class="icon-user"></i></div>
-                                        <div class="text">Logout</div>
+                                        <div class="text">Cerrar Sesión</div>
                                     </a>
                                     </form>
                                 </li>
@@ -190,13 +190,13 @@
 
 
                                 <form class="form-search flex-grow">
-                                    <fieldset class="name">
+                              <!--  <fieldset class="name">
                                         <input type="text" placeholder="Search here..." class="show-search" name="name"
-                                            tabindex="2" value="" aria-required="true" required="">
-                                    </fieldset>
+                                            tabindex="2" value="" aria-required="true" required=""> 
+                                    </fieldset> 
                                     <div class="button-submit">
                                         <button class="" type="submit"><i class="icon-search"></i></button>
-                                    </div>
+                                    </div>  
                                     <div class="box-content-search" id="box-content-search">
                                         <ul class="mb-24">
                                             <li class="mb-14">
@@ -314,7 +314,7 @@
                                                 </ul>
                                             </li>
                                         </ul>
-                                    </div>
+                                    </div>-->
                                 </form>
 
                             </div>
@@ -322,13 +322,13 @@
 
                                 <div class="popup-wrap message type-header">
                                     <div class="dropdown">
-                                        <button class="btn btn-secondary dropdown-toggle" type="button"
+                                 <!--       <button class="btn btn-secondary dropdown-toggle" type="button"
                                             id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
                                             <span class="header-item">
                                                 <span class="text-tiny">1</span>
                                                 <i class="icon-bell"></i>
                                             </span>
-                                        </button>
+                                        </button>-->
                                         <ul class="dropdown-menu dropdown-menu-end has-content"
                                             aria-labelledby="dropdownMenuButton2">
                                             <li>
@@ -395,20 +395,20 @@
                                         <button class="btn btn-secondary dropdown-toggle" type="button"
                                             id="dropdownMenuButton3" data-bs-toggle="dropdown" aria-expanded="false">
                                             <span class="header-user wg-user">
-                                                <span class="image">
+                                          <!--      <span class="image">
                                                     <img src="images/avatar/user-1.png" alt="">
-                                                </span>
+                                                </span> -->
                                                
                                                 <span class="flex flex-column">
-                                                    <span class="body-title mb-2">j</span>
-                                                    <span class="text-tiny">Admin</span>
+                                                    <span class="body-title mb-2">{{Auth::user()->name}}</span>
+                                                    <span class="text-tiny">Administrador</span>
                                                 </span>
                                                
                                             </span>
                                         </button>
                                         <ul class="dropdown-menu dropdown-menu-end has-content"
                                             aria-labelledby="dropdownMenuButton3">
-                                            <li>
+                                    <!--     <li>
                                                 <a href="#" class="user-item">
                                                     <div class="icon">
                                                         <i class="icon-user"></i>
@@ -440,13 +440,17 @@
                                                     </div>
                                                     <div class="body-title-2">Support</div>
                                                 </a>
-                                            </li>
+                                            </li>  -->
                                             <li>
-                                                <a href="login.html" class="user-item">
+                                                  <form method="POST" action="{{route('logout')}}" id="logout-form"> 
+                                                @csrf
+                        
+                                                    <a href="{{route('logout')}}" class="user-item" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
                                                     <div class="icon">
                                                         <i class="icon-log-out"></i>
                                                     </div>
-                                                    <div class="body-title-2">Log out</div>
+                                                    
+                                                    <div class="body-title-2">Cerrar Sesión</div>
                                                 </a>
                                             </li>
                                         </ul>

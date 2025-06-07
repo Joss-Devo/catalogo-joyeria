@@ -18,15 +18,15 @@
             alt="Woman Fashion 1"
             class="slideshow-character__img animate animate_fade animate_btt animate_delay-9 w-auto h-auto" />
           <div class="character_markup">
-            <p class="text-uppercase font-sofia fw-bold animate animate_fade animate_rtl animate_delay-10">Summer
+            <p class="text-uppercase font-sofia fw-bold animate animate_fade animate_rtl animate_delay-10">
             </p>
           </div>
         </div>
         <div class="slideshow-text container position-absolute start-50 top-50 translate-middle">
           <h6 class="text_dash text-uppercase fs-base fw-medium animate animate_fade animate_btt animate_delay-3">
-            New Arrivals</h6>
-          <h2 class="h1 fw-normal mb-0 animate animate_fade animate_btt animate_delay-5">Night Spring</h2>
-          <h2 class="h1 fw-bold animate animate_fade animate_btt animate_delay-5">Dresses</h2>
+            Nuevo</h6>
+          <h2 class="h1 fw-normal mb-0 animate animate_fade animate_btt animate_delay-5">Joyería</h2>
+          <h2 class="h1 fw-bold animate animate_fade animate_btt animate_delay-5">Atemporal</h2>
           <a href="#"
             class="btn-link btn-link_lg default-underline fw-medium animate animate_fade animate_btt animate_delay-7">Comprar Ahora</a>
         </div>
@@ -40,15 +40,15 @@
             alt="Woman Fashion 1"
             class="slideshow-character__img animate animate_fade animate_btt animate_delay-9 w-auto h-auto" />
           <div class="character_markup">
-            <p class="text-uppercase font-sofia fw-bold animate animate_fade animate_rtl animate_delay-10">Summer
+            <p class="text-uppercase font-sofia fw-bold animate animate_fade animate_rtl animate_delay-10">
             </p>
           </div>
         </div>
         <div class="slideshow-text container position-absolute start-50 top-50 translate-middle">
           <h6 class="text_dash text-uppercase fs-base fw-medium animate animate_fade animate_btt animate_delay-3">
-            New Arrivals</h6>
-          <h2 class="h1 fw-normal mb-0 animate animate_fade animate_btt animate_delay-5">Night Spring</h2>
-          <h2 class="h1 fw-bold animate animate_fade animate_btt animate_delay-5">Dresses</h2>
+            Nuevo</h6>
+          <h2 class="h1 fw-normal mb-0 animate animate_fade animate_btt animate_delay-5">Diseño</h2>
+          <h2 class="h1 fw-bold animate animate_fade animate_btt animate_delay-5">Uníco</h2>
           <a href="#"
             class="btn-link btn-link_lg default-underline fw-medium animate animate_fade animate_btt animate_delay-7">Comprar Ahora</a>
         </div>
@@ -64,12 +64,11 @@
         </div>
         <div class="slideshow-text container position-absolute start-50 top-50 translate-middle">
           <h6 class="text_dash text-uppercase fs-base fw-medium animate animate_fade animate_btt animate_delay-3">
-            New Arrivals</h6>
-          <h2 class="h1 fw-normal mb-0 animate animate_fade animate_btt animate_delay-5">Night Spring</h2>
-          <h2 class="h1 fw-bold animate animate_fade animate_btt animate_delay-5">Dresses</h2>
+            Nuevo</h6>
+          <h2 class="h1 fw-normal mb-0 animate animate_fade animate_btt animate_delay-5">Lujo</h2>
+          <h2 class="h1 fw-bold animate animate_fade animate_btt animate_delay-5">Moda</h2>
           <a href="#"
-            class="btn-link btn-link_lg default-underline fw-medium animate animate_fade animate_btt animate_delay-7">Shop
-            Now</a>
+            class="btn-link btn-link_lg default-underline fw-medium animate animate_fade animate_btt animate_delay-7">Comprar Ahora</a>
         </div>
       </div>
     </div>
@@ -831,7 +830,7 @@
     </div>-->
 
     <div class="text-center mt-2">
-      <a class="btn-link btn-link_lg default-underline text-uppercase fw-medium" href="#">Load More</a>
+    <!-- <a class="btn-link btn-link_lg default-underline text-uppercase fw-medium" href="#">Load More</a> -->
     </div>
   </section>
 </div>

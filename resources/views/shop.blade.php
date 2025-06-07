@@ -279,7 +279,7 @@
           <div class="breadcrumb mb-0 d-none d-md-block flex-grow-1">
             <a href="{{route('home.index')}}" class="menu-link menu-link_us-s text-uppercase fw-medium">Home</a>
             <span class="breadcrumb-separator menu-link fw-medium ps-1 pe-1">/</span>
-            <a href="#" class="menu-link menu-link_us-s text-uppercase fw-medium">The Shop</a>
+            <a href="#" class="menu-link menu-link_us-s text-uppercase fw-medium">Tienda</a>
           </div>
 
           <div class="shop-acs d-flex align-items-center justify-content-between justify-content-md-end flex-grow-1">
@@ -399,9 +399,9 @@
                   @csrf
                   @method('DELETE')
                 <button type="submit" class="pc__btn-wl position-absolute top-0 end-0 bg-transparent border-0 js-add-wishlist filled-heart" title="Eliminar de lista de deseos">
-                  <svg width="16" height="16" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <use href="#icon_heart" />
-                  </svg>
+                 <svg width="16" height="16" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                   <use href="#icon_heart" /> 
+                  </svg> 
                 </button>
                 </form>
                 @else
@@ -415,7 +415,7 @@
                   <button type="submit" class="pc__btn-wl position-absolute top-0 end-0 bg-transparent border-0" title="Add To Wishlist">
                 <button type="submit" class="pc__btn-wl position-absolute top-0 end-0 bg-transparent border-0 js-add-wishlist" title="Agregar a lista de deseos">
                   <svg width="16" height="16" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <use href="#icon_heart" />
+                <!--    <use href="#icon_heart" /> -->
                   </svg>
                 </button>
                 </form>

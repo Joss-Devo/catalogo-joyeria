@@ -10,11 +10,8 @@
         </div>
         <div class="col-lg-9">
           <div class="page-content my-account__dashboard">
-            <p>Hello <strong>User</strong></p>
-            <p>From your account dashboard you can view your <a class="unerline-link" href="account_orders.html">recent
-                orders</a>, manage your <a class="unerline-link" href="account_edit_address.html">shipping
-                addresses</a>, and <a class="unerline-link" href="account_edit.html">edit your password and account
-                details.</a></p>
+            <p>Hola <strong>{{Auth::user()->name}}</strong></p>
+            <p>Desde el panel de tu cuenta puedes ver tu <a class="unerline-link" href="account_orders.html">pedidos recientes</a>, gestionar tus <a class="unerline-link" href="account_edit_address.html">dirección de envío</a>, y <a class="unerline-link" href="account_edit.html"></a></p>
           </div>
         </div>
       </div>

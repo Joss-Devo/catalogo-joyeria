@@ -48,16 +48,16 @@
                         <table class="table table-striped table-bordered">
                             <thead>
                                 <tr>
-                                    <th style="width: 80px">OrderNo</th>
-                                    <th>Name</th>
-                                    <th class="text-center">Phone</th>
+                                    <th style="width: 80px">Numero de Orden</th>
+                                    <th>Nombre</th>
+                                    <th class="text-center">Movil</th>
                                     <th class="text-center">Subtotal</th>
-                                    <th class="text-center">Tax</th>
+                                    <th class="text-center">IVA</th>
                                     <th class="text-center">Total</th>
                                     <th class="text-center">Status</th>
-                                    <th class="text-center">Order Date</th>
-                                    <th class="text-center">Items</th>
-                                    <th class="text-center">Delivered On</th>
+                                    <th class="text-center">Fecha</th>
+                                    <th class="text-center">Articulos</th>
+                                    <th class="text-center">Entrega</th>
                                     <th></th>
                                 </tr>
                             </thead>

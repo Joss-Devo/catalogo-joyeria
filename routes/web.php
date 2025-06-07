@@ -9,8 +9,8 @@ use App\Http\Middleware\AuthAdmin;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\WishlistController;
-
-
+use App\Http\Controllers\ContactoController;
+use App\Http\Controllers\AboutController;
 Auth::routes();
 
 Route::get('/', [HomeController::class, 'index'])->name('home.index');
@@ -35,10 +35,13 @@ Route::post('/wishlist/move-to-cart/{rowId}',[WishlistController::class,'move_to
 
 Route::get('/checkout',[CartController::class,'checkout'])->name('cart.checkout');
 Route::post('/place-an-order',[CartController::class,'place_an_order'])->name('cart.place.an.order');
-Route::post('/order-confirmation',[CartController::class,'order_confirmation'])->name('cart.order.confirmation');
-Route::post('/pasarela',[CartController::class,'order_confirmation'])->name('cart.pasarela');
+Route::get('/order-confirmation',[CartController::class,'order_confirmation'])->name('cart.order.confirmation');
+
+Route::get('/pago/pasarela', [CartController::class, 'place_an_order'])->name('cart.pasarela');
 
 
+Route::get('/contacto', [ContactoController::class, 'mostrar'])->name('contacto');
+Route::get('/nosotros', [AboutController::class, 'About'])->name('about');
 
 
 Route::middleware(['auth'])->group(function(){
@@ -83,8 +86,9 @@ Route::middleware(['auth'],AuthAdmin::class)->group(function(){
     Route::get('/admin/order/{order_id}/details',[AdminController::class,'order_details'])->name('admin.order.details');
     Route::put('/admin/order/update-status',[AdminController::class,'update_order_status'])->name('admin.order.status.update');
     
-    
-    
+    Route::get('/admin/users', [AdminController::class, 'users'])->name('admin.users');
+    Route::delete('/admin/user/{id}/delete', [AdminController::class, 'user_delete'])->name('admin.user.delete');
+    Route::put('/admin/user/{id}/utype', [AdminController::class, 'user_update_utype'])->name('admin.user.update.utype');
 
-}); 
+});
 

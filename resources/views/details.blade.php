@@ -66,10 +66,10 @@
             <div class="breadcrumb mb-0 d-none d-md-block flex-grow-1">
               <a href="#" class="menu-link menu-link_us-s text-uppercase fw-medium">Home</a>
               <span class="breadcrumb-separator menu-link fw-medium ps-1 pe-1">/</span>
-              <a href="#" class="menu-link menu-link_us-s text-uppercase fw-medium">The Shop</a>
+              <a href="#" class="menu-link menu-link_us-s text-uppercase fw-medium">Tienda</a>
             </div><!-- /.breadcrumb -->
 
-            <div
+          <!--  <div
               class="product-single__prev-next d-flex align-items-center justify-content-between justify-content-md-end flex-grow-1">
               <a href="#" class="text-uppercase fw-medium"><svg width="10" height="10" viewBox="0 0 25 25"
                   xmlns="http://www.w3.org/2000/svg">
@@ -79,7 +79,7 @@
                   width="10" height="10" viewBox="0 0 25 25" xmlns="http://www.w3.org/2000/svg">
                   <use href="#icon_next_md" />
                 </svg></a>
-            </div><!-- /.shop-acs -->
+            </div>-->
           </div>
           <h1 class="product-single__name">{{$product->name}}</h1>
           <div class="product-single__rating">
@@ -188,16 +188,16 @@
           </div>
           <div class="product-single__meta-info">
             <div class="meta-item">
-              <label>SKU:</label>
-              <span>{{$product->SKU}}</span>
+          <!--    <label>SKU:</label>
+              <span>{{$product->SKU}}</span> -->
             </div>
             <div class="meta-item">
               <label>Categories:</label>
               <span>{{$product->category->name}}</span>
             </div>
             <div class="meta-item">
-              <label>Tags:</label>
-              <span>NA</span>
+            <!--  <label>Tags:</label>
+              <span>NA</span>-->
             </div>
           </div>
         </div>
@@ -208,7 +208,7 @@
             <a class="nav-link nav-link_underscore active" id="tab-description-tab" data-bs-toggle="tab"
               href="#tab-description" role="tab" aria-controls="tab-description" aria-selected="true">Description</a>
           </li>
-          <li class="nav-item" role="presentation">
+         <!-- <li class="nav-item" role="presentation">
             <a class="nav-link nav-link_underscore" id="tab-additional-info-tab" data-bs-toggle="tab"
               href="#tab-additional-info" role="tab" aria-controls="tab-additional-info"
               aria-selected="false">Additional Information</a>
@@ -216,7 +216,7 @@
           <li class="nav-item" role="presentation">
             <a class="nav-link nav-link_underscore" id="tab-reviews-tab" data-bs-toggle="tab" href="#tab-reviews"
               role="tab" aria-controls="tab-reviews" aria-selected="false">Reviews (2)</a>
-          </li>
+          </li> -->
         </ul>
         <div class="tab-content">
           <div class="tab-pane fade show active" id="tab-description" role="tabpanel"
@@ -453,12 +453,12 @@
                   </span>
                 </div>
 
-                <button class="pc__btn-wl position-absolute top-0 end-0 bg-transparent border-0 js-add-wishlist"
+             <!--   <button class="pc__btn-wl position-absolute top-0 end-0 bg-transparent border-0 js-add-wishlist"
                   title="Add To Wishlist">
                   <svg width="16" height="16" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <use href="#icon_heart" />
                   </svg>
-                </button>
+                </button>  -->
               </div>
             </div>
             @endforeach

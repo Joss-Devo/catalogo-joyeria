@@ -9,6 +9,7 @@ use App\Models\Coupon;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\Transaction;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -17,6 +18,11 @@ use Intervention\Image\Laravel\Facades\Image;
 
 class AdminController extends Controller
 {
+    public function users()
+    {
+        $users = User::all();
+        return view('admin.users', compact('users'));
+    }
     public function index()
     {
         return view('admin.index');
@@ -537,4 +543,21 @@ public function update_order_status(Request $request)
     return back()->with("status", "Estado cambiado con éxito!");
 }
 
-}  
+public function user_delete($id)
+{
+    $user = User::findOrFail($id);
+    $user->delete();
+    return redirect()->route('admin.users')->with('status', 'Usuario eliminado exitosamente!');
+}
+
+public function user_update_utype(Request $request, $id)
+{
+    $request->validate([
+        'utype' => 'required|string|max:255'
+    ]);
+    $user = User::findOrFail($id);
+    $user->utype = $request->utype;
+    $user->save();
+    return redirect()->route('admin.users')->with('status', 'Tipo de usuario actualizado exitosamente!');
+}
+}
