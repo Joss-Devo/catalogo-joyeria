@@ -1,6 +1,7 @@
 
 @extends('layouts.admin')
 @section('content')
+                  
 <div class="main-content-inner">
                             <div class="main-content-wrap">
                                 <div class="flex items-center flex-wrap justify-between gap20 mb-27">
@@ -15,7 +16,7 @@
                                             <i class="icon-chevron-right"></i>
                                         </li>
                                         <li>
-                                            <a href="{{route('admin.brands')}}">
+                                            <a href="{{route('admin.brand.add')}}">
                                                 <div class="text-tiny">Marcas</div>
                                             </a>
                                         </li>
@@ -27,7 +28,7 @@
                                         </li>
                                     </ul>
                                 </div>
-                                <!-- new-category -->
+                                 
                                 <div class="wg-box">
                                     <form class="form-new-product form-style-1" action="{{route('admin.brand.store')}}" method="POST" enctype="multipart/form-data">
                                         @csrf
@@ -69,7 +70,7 @@
                                     </form>
                                 </div>
                             </div>
-                        </div>
+                        </div> 
 @endsection
 @push('scripts')
 <script>
@@ -89,7 +90,8 @@
         }); 
     });
 
-    function StringToSlug(Text) {
+    function StringToSlug(Text) 
+    {
         return Text.toLowerCase()
         .replace(/[^\w ]+/g, "")
         .replace(/ +/g, "-");

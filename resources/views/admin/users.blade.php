@@ -93,7 +93,7 @@
                                     </div>
                                     <div class="divider"></div>
                                     <div class="flex items-center justify-between flex-wrap gap10 wgp-pagination">
-                                        {{-- Aquí puedes agregar paginación si lo deseas --}}
+                                        {{--  --}}
                                     </div>
                                 </div>
                             </div>

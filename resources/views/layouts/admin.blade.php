@@ -48,7 +48,7 @@
                     </div>
                     <div class="center">
                         <div class="center-item">
-                            <div class="center-heading">Main Home</div>
+                            <div class="center-heading">Menu</div>
                             <ul class="menu-list">
                                 <li class="menu-item">
                                     <a href="{{route('admin.index')}}" class="">
@@ -126,14 +126,14 @@
                                                 <div class="text">Ordenes</div>
                                             </a>
                                         </li>
-                                        <li class="sub-menu-item">
-                                            <a href="order-tracking.html" class="">
+                                       <li class="sub-menu-item">
+                                          <!--  <a href="order-tracking.html" class="">
                                                 <div class="text">Order tracking</div>
-                                            </a>
+                                            </a>-->
                                         </li>
                                     </ul>
                                 </li>
-                        <!--     <li class="menu-item">
+                     <!--     <li class="menu-item">
                                     <a href="slider.html" class="">
                                         <div class="icon"><i class="icon-image"></i></div>
                                         <div class="text">Slider</div>
@@ -153,7 +153,7 @@
                                     </a>
                                 </li>
 
-                            <!--   <li class="menu-item">
+                     <!--       <li class="menu-item">
                                     <a href="settings.html" class="">
                                         <div class="icon"><i class="icon-settings"></i></div>
                                         <div class="text">Settings</div>
@@ -190,13 +190,13 @@
 
 
                                 <form class="form-search flex-grow">
-                              <!--  <fieldset class="name">
+                         <!--     <fieldset class="name">
                                         <input type="text" placeholder="Search here..." class="show-search" name="name"
                                             tabindex="2" value="" aria-required="true" required=""> 
                                     </fieldset> 
                                     <div class="button-submit">
                                         <button class="" type="submit"><i class="icon-search"></i></button>
-                                    </div>  
+                                    </div>  -->
                                     <div class="box-content-search" id="box-content-search">
                                         <ul class="mb-24">
                                             <li class="mb-14">
@@ -314,21 +314,21 @@
                                                 </ul>
                                             </li>
                                         </ul>
-                                    </div>-->
+                                    </div>
                                 </form>
 
                             </div>
                             <div class="header-grid">
 
                                 <div class="popup-wrap message type-header">
-                                    <div class="dropdown">
-                                 <!--       <button class="btn btn-secondary dropdown-toggle" type="button"
+                                 <!--   <div class="dropdown">
+                                      <button class="btn btn-secondary dropdown-toggle" type="button"
                                             id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
                                             <span class="header-item">
                                                 <span class="text-tiny">1</span>
                                                 <i class="icon-bell"></i>
                                             </span>
-                                        </button>-->
+                                        </button>
                                         <ul class="dropdown-menu dropdown-menu-end has-content"
                                             aria-labelledby="dropdownMenuButton2">
                                             <li>
@@ -384,7 +384,7 @@
                                             </li>
                                             <li><a href="#" class="tf-button w-full">View all</a></li>
                                         </ul>
-                                    </div>
+                                    </div> -->
                                 </div>
 
 
@@ -395,7 +395,7 @@
                                         <button class="btn btn-secondary dropdown-toggle" type="button"
                                             id="dropdownMenuButton3" data-bs-toggle="dropdown" aria-expanded="false">
                                             <span class="header-user wg-user">
-                                          <!--      <span class="image">
+                                           <!--     <span class="image">
                                                     <img src="images/avatar/user-1.png" alt="">
                                                 </span> -->
                                                
@@ -406,9 +406,9 @@
                                                
                                             </span>
                                         </button>
-                                        <ul class="dropdown-menu dropdown-menu-end has-content"
+                                 <!--       <ul class="dropdown-menu dropdown-menu-end has-content"
                                             aria-labelledby="dropdownMenuButton3">
-                                    <!--     <li>
+                                         <li>
                                                 <a href="#" class="user-item">
                                                     <div class="icon">
                                                         <i class="icon-user"></i>
@@ -440,12 +440,11 @@
                                                     </div>
                                                     <div class="body-title-2">Support</div>
                                                 </a>
-                                            </li>  -->
-                                            <li>
-                                                  <form method="POST" action="{{route('logout')}}" id="logout-form"> 
-                                                @csrf
+                                            </li>  
+                                            <li> 
+
                         
-                                                    <a href="{{route('logout')}}" class="user-item" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
+                                                    <a href="#" class="user-item" >
                                                     <div class="icon">
                                                         <i class="icon-log-out"></i>
                                                     </div>
@@ -453,7 +452,7 @@
                                                     <div class="body-title-2">Cerrar Sesión</div>
                                                 </a>
                                             </li>
-                                        </ul>
+                                        </ul> -->
                                     </div>
                                 </div>
 

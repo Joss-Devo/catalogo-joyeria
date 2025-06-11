@@ -11,6 +11,8 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\WishlistController;
 use App\Http\Controllers\ContactoController;
 use App\Http\Controllers\AboutController;
+
+
 Auth::routes();
 
 Route::get('/', [HomeController::class, 'index'])->name('home.index');
@@ -36,9 +38,6 @@ Route::post('/wishlist/move-to-cart/{rowId}',[WishlistController::class,'move_to
 Route::get('/checkout',[CartController::class,'checkout'])->name('cart.checkout');
 Route::post('/place-an-order',[CartController::class,'place_an_order'])->name('cart.place.an.order');
 Route::get('/order-confirmation',[CartController::class,'order_confirmation'])->name('cart.order.confirmation');
-
-Route::get('/pago/pasarela', [CartController::class, 'place_an_order'])->name('cart.pasarela');
-
 
 Route::get('/contacto', [ContactoController::class, 'mostrar'])->name('contacto');
 Route::get('/nosotros', [AboutController::class, 'About'])->name('about');
