@@ -33,12 +33,12 @@
                                         @csrf
                                         <fieldset class="name">
                                             <div class="body-title">Nombre de Categoría<span class="tf-color-1">*</span></div>
-                                            <input class="flex-grow" type="text" placeholder="Category name" name="name" tabindex="0" value="{{old('name')}}" aria-required="true" required="">
+                                            <input class="flex-grow" type="text" placeholder="Nombre de categoría" name="name" tabindex="0" value="{{old('name')}}" aria-required="true" required="">
                                         </fieldset>
                                         @error('name')<span class= "alert alert-danger text-center">{{$message}}</span> @enderror
                                         <fieldset class="name">
                                             <div class="body-title">Slug Categoría <span class="tf-color-1">*</span></div>
-                                            <input class="flex-grow" type="text" placeholder="Category Slug" name="slug" tabindex="0" value="{{old('slug')}}" aria-required="true" required="">
+                                            <input class="flex-grow" type="text" placeholder=" Slug" name="slug" tabindex="0" value="{{old('slug')}}" aria-required="true" required="">
                                         </fieldset>
                                         @error('slug')<span class= "alert alert-danger text-center">{{$message}}</span>@enderror
                                             <fieldset>
