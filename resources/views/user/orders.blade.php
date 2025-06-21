@@ -36,7 +36,7 @@
 <main class="pt-90" style="padding-top: 0px;">
     <div class="mb-4 pb-4"></div>
     <section class="my-account container">
-        <h2 class="page-title">Orders</h2>
+        <h2 class="page-title">Pedidos</h2>
         <div class="row">
             <div class="col-lg-2">
                @include('user.account-nav')
@@ -72,11 +72,11 @@
                                     <td class="text-center">${{$order->total}}</td> 
                                     <td class="text-center">
                                         @if($order->status =='delivered')
-                                            <span class="badge bg-success">Delivered</span>
+                                            <span class="badge bg-success">Entregado</span>
                                         @elseif($order->status =='canceled')
-                                            <span class="badge bg-danger">Canceled</span>
+                                            <span class="badge bg-danger">Cancelado</span>
                                         @else
-                                            <span class="badge bg-warning">Ordered</span>
+                                            <span class="badge bg-warning">Pedido realizado</span>
                                         @endif
                                     </td>
                                     <td class="text-center">{{$order->created_at}}</td> 

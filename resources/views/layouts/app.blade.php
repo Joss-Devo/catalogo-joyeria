@@ -625,7 +625,7 @@
       <div class="container d-md-flex align-items-center">
         <span class="footer-copyright me-auto">©2025 TecNM</span>
         <div class="footer-settings d-md-flex align-items-center">
-          <a href="privacy-policy.html">Politicas de privacidad</a> &nbsp;|&nbsp; <a href="terms-conditions.html">Terminos &amp;
+          <a href="{{route('condiciones')}}">Politicas de privacidad</a> &nbsp;|&nbsp; <a href="{{route('terminos')}}">Terminos &amp;
             Condiciones</a> 
         </div>
       </div>

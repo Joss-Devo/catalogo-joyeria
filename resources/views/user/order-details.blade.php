@@ -114,7 +114,7 @@
                                                 <h5>Detalles del pedido</h5>
                                             </div>
                                             <div class="col-6 text-right">
-                                                <a class="btn btn-sm btn-danger" href="{{route('user.orders')}}">Back</a>
+                                                <a class="btn btn-sm btn-danger" href="{{route('user.orders')}}">Regresar</a>
                                             </div>
                                         </div> 
                                     </div>
@@ -124,30 +124,30 @@
                                         @endif
                                         <table class="table table-bordered table-striped table-transaction">
                                                 <tr>
-                                                    <th>Orden No.</th>
+                                                    <th>No. Pedido</th>
                                                     <td>{{$order->id}}</td>
                                                     <th>Mobil</th>
                                                     <td>{{$order->phone}}</td>
-                                                    <th>Zip Code</th>
+                                                    <th>Codigo Postal</th>
                                                     <td>{{$order->zip}}</td>
                                                 </tr>
                                                 <tr>
-                                                    <th>Datos de Orden</th>
+                                                    <th>Fecha</th>
                                                     <td>{{$order->created_at}}</td>
-                                                    <th>Delivered Date</th>
+                                                    <th>Fecha de Entrega</th>
                                                     <td>{{$order->delivered_date}}</td>
-                                                    <th>Canceled Date</th>
+                                                    <th>Fecha de Cancelación</th>
                                                     <td>{{$order->canceled_date}}</td>
                                                 </tr>
                                                 <tr>
-                                                <th>Order Status</th>
+                                                <th>Estado de Pedido</th>
                                                 <td colspan="5">
                                                     @if($order->status=='delivered')
-                                                        <span class="badge bg-success">Delivered</span>
+                                                        <span class="badge bg-success">Entregado</span>
                                                     @elseif($order->status=='canceled')
-                                                        <span class="badge bg-danger">Canceled</span>
+                                                        <span class="badge bg-danger">Cancelado</span>
                                                     @else
-                                                        <span class="badge bg-warning">Ordered</span>
+                                                        <span class="badge bg-warning">Pedido Realizado</span>
                                                     @endif
                                                 </td>
                                              </tr>
@@ -158,22 +158,22 @@
                                 <div class="wg-box">
                                     <div class="flex items-center justify-between gap10 flex-wrap">
                                         <div class="wg-filter flex-grow">
-                                            <h5>Ordered Items</h5>
+                                            <h5>Productos solicitados</h5>
                                         </div>
                                     </div>
                                     <div class="table-responsive">
                                         <table class="table table-striped table-bordered">
                                             <thead>
                                                 <tr>
-                                                    <th>Name</th>
-                                                    <th class="text-center">Price</th>
-                                                    <th class="text-center">Quantity</th>
+                                                    <th>Nombre</th>
+                                                    <th class="text-center">Pricio</th>
+                                                    <th class="text-center">Cantidad</th>
                                                     <th class="text-center">SKU</th>
-                                                    <th class="text-center">Category</th>
-                                                    <th class="text-center">Brand</th>
-                                                    <th class="text-center">Options</th>
-                                                    <th class="text-center">Return Status</th>
-                                                    <th class="text-center">Action</th>
+                                                    <th class="text-center">Categoría</th>
+                                                    <th class="text-center">Marca</th>
+                                                    <th class="text-center">Opción</th>
+                                                    <th class="text-center">Estado de devolución</th>
+                                                    <th class="text-center">Acción</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -215,7 +215,7 @@
                                 </div>
 
                                 <div class="wg-box mt-5">
-                                    <h5>Shipping Address</h5>
+                                    <h5>Direccón de envío</h5>
                                     <div class="my-account__address-item col-md-6">
                                         <div class="my-account__address-item__detail">
                                         <p>{{$order->name}}</p>
@@ -231,32 +231,32 @@
                                 </div>
 
                                 <div class="wg-box mt-5">
-                                    <h5>Transactions</h5>
+                                    <h5>Transacciones</h5>
                                     <table class="table table-striped table-bordered table-transaction">
                                         <tbody>
                                             <tr>
                                                 <th>Subtotal</th>
                                                 <td>${{$order->subtotal}}</td>
-                                                <th>Tax</th>
+                                                <th>IVA</th>
                                                 <td>${{$order->tax}}</td>
-                                                <th>Discount</th>
+                                                <th>Descuento</th>
                                                 <td>${{$order->discount}}</td>
                                             </tr>
                                             <tr>
                                                 <th>Total</th>
                                                 <td>${{$order->total}}</td>
-                                                <th>Payment Mode</th>
+                                                <th>Pago</th>
                                                 <td>{{$transaction->mode}}</td>
-                                                <th>Status</th>
+                                                <th>Estado</th>
                                             <td>
                                                 @if($transaction->status =='approved')
-                                                    <span class="badge bg-success">Approved</span>
+                                                    <span class="badge bg-success">Aprovado</span>
                                                 @elseif($transaction->status =='declined')
-                                                    <span class="badge bg-danger">Declined</span>
+                                                    <span class="badge bg-danger">Entregado</span>
                                                 @elseif($transaction->status =='refunded')
-                                                    <span class="badge bg-secondary">Refunded</span>
+                                                    <span class="badge bg-secondary">Reembolsado</span>
                                                 @else
-                                                    <span class="badge bg-warning">Pending</span>
+                                                    <span class="badge bg-warning">Pendiente</span>
                                                 @endif
                                                 </td>
                                             </tr>

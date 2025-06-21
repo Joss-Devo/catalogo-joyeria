@@ -195,7 +195,7 @@ public function place_an_order(Request $request)
     $transaction->user_id = $user_id;
     $transaction->order_id = $order->id;
     $transaction->mode = $request->mode;
-    $transaction->status = "pending"; // puede cambiar a "approved" si PayPal devuelve confirmación
+    $transaction->status = "pending"; 
     $transaction->save();
     }
     elseif($request->mode == "cod")

@@ -23,7 +23,7 @@
                     <i class="icon-chevron-right"></i>
                 </li>
                 <li>
-                    <div class="text-tiny">All Order</div>
+                    <div class="text-tiny">Pedidos</div>
                 </li>
             </ul>
         </div>

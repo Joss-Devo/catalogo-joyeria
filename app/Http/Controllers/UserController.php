@@ -44,4 +44,14 @@ public function order_cancel(Request $request)
     $order->save();
     return back()->with("status", "La orden ha sido Cancelado Exitosamente!");
     }
+
+public function direccionEnvio()
+{
+    $orders = Order::where('user_id', Auth::id())->get();
+    return view('user.direccion-envio', compact('orders'));
+}
+
+
+    
+
 }

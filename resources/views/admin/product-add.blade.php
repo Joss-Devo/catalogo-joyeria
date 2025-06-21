@@ -35,7 +35,7 @@
                 <fieldset class="name">
                     <div class="body-title mb-10">Nombre del Producto <span class="tf-color-1">*</span>
                     </div>
-                    <input class="mb-10" type="text" placeholder="Enter product name" name="name" tabindex="0" value="{{old('name')}}" aria-required="true" required="">
+                    <input class="mb-10" type="text" placeholder="Nombre" name="name" tabindex="0" value="{{old('name')}}" aria-required="true" required="">
                     <div class="text-tiny">No excedas los 100 caracteres al ingresar el nombre del producto..</div>
                 </fieldset>
                 @error('name') <span class="alert alert-danger text-center">{{$message}} @enderror
@@ -43,7 +43,7 @@
 
                 <fieldset class="name">
                     <div class="body-title mb-10">Slug <span class="tf-color-1">*</span></div>
-                    <input class="mb-10" type="text" placeholder="Enter product slug" name="slug" tabindex="0" value="{{old('slug')}}" aria-required="true" required="">
+                    <input class="mb-10" type="text" placeholder="slug" name="slug" tabindex="0" value="{{old('slug')}}" aria-required="true" required="">
                     
                 </fieldset>
                 @error('slug') <span class="alert alert-danger text-center">{{$message}} @enderror
@@ -65,7 +65,7 @@
                     </fieldset>
                     @error('category_id') <span class="alert alert-danger text-center">{{$message}} @enderror
                     <fieldset class="brand">
-                        <div class="body-title mb-10">Brand <span class="tf-color-1">*</span>
+                        <div class="body-title mb-10">Marca <span class="tf-color-1">*</span>
                         </div>
                         <div class="select">
                             <select class="" name="brand_id">
@@ -81,7 +81,7 @@
 
                 <fieldset class="shortdescription">
                     <div class="body-title mb-10">Descripción corta <span class="tf-color-1">*</span></div>
-                    <textarea class="mb-10 ht-150" name="short_description" placeholder="Short Description" tabindex="0" aria-required="true" required="">{{old('short_description')}}</textarea>
+                    <textarea class="mb-10 ht-150" name="short_description" placeholder="Descripción corta" tabindex="0" aria-required="true" required="">{{old('short_description')}}</textarea>
                     <div class="text-tiny">No excedas los 100 caracteres al ingresar el nombre del producto.</div>
                 </fieldset>
                 
@@ -90,7 +90,7 @@
                 <fieldset class="description">
                     <div class="body-title mb-10">Descripción <span class="tf-color-1">*</span>
                     </div>
-                    <textarea class="mb-10" name="description" placeholder="Description" tabindex="0" aria-required="true" required="">{{old('description')}}</textarea>
+                    <textarea class="mb-10" name="description" placeholder="Descripción" tabindex="0" aria-required="true" required="">{{old('description')}}</textarea>
                     <div class="text-tiny">No excedas los 100 caracteres al ingresar el nombre del producto.</div>
                 </fieldset>
                 
@@ -143,13 +143,13 @@
                     <fieldset class="name">
                         <div class="body-title mb-10">Precio regular <span
                                 class="tf-color-1">*</span></div>
-                        <input class="mb-10" type="text" placeholder="Enter regular price" name="regular_price" tabindex="0" value="{{old('regular_price')}}" aria-required="true" required="">
+                        <input class="mb-10" type="text" placeholder="Precio regular" name="regular_price" tabindex="0" value="{{old('regular_price')}}" aria-required="true" required="">
                     </fieldset>
                     @error('regular_price') <span class="alert alert-danger text-center">{{$message}} @enderror
                     <fieldset class="name">
                         <div class="body-title mb-10">Precio de oferta <span
                                 class="tf-color-1">*</span></div>
-                        <input class="mb-10" type="text" placeholder="Enter sale price" name="sale_price" tabindex="0" value="{{old('sale_price')}}" aria-required="true" required="">
+                        <input class="mb-10" type="text" placeholder="Precio de oferta" name="sale_price" tabindex="0" value="{{old('sale_price')}}" aria-required="true" required="">
                     </fieldset>
                     
                     @error('sale_price') <span class="alert alert-danger text-center">{{$message}} @enderror
@@ -160,13 +160,13 @@
                     <fieldset class="name">
                         <div class="body-title mb-10">SKU <span class="tf-color-1">*</span>
                         </div>
-                        <input class="mb-10" type="text" placeholder="Enter SKU" name="SKU" tabindex="0" value="{{old('SKU')}}" aria-required="true" required="">
+                        <input class="mb-10" type="text" placeholder="SKU" name="SKU" tabindex="0" value="{{old('SKU')}}" aria-required="true" required="">
                     </fieldset>
                     @error('SKU') <span class="alert alert-danger text-center">{{$message}} @enderror
                     <fieldset class="name">
                         <div class="body-title mb-10">Cantidad <span class="tf-color-1">*</span>
                         </div>
-                        <input class="mb-10" type="text" placeholder="Enter quantity" name="quantity" tabindex="0" value="{{old('quantity')}}" aria-required="true"
+                        <input class="mb-10" type="text" placeholder="Cantidad" name="quantity" tabindex="0" value="{{old('quantity')}}" aria-required="true"
                             required="">
                     </fieldset>
                     
@@ -240,3 +240,4 @@
             }      
     </script>
 @endpush
+

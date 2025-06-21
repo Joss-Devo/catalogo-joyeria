@@ -15,6 +15,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\File;
 use Intervention\Image\Laravel\Facades\Image;
+use Illuminate\Support\Facades\Hash;
+
 
 class AdminController extends Controller
 {
@@ -560,4 +562,76 @@ public function user_update_utype(Request $request, $id)
     $user->save();
     return redirect()->route('admin.users')->with('status', 'Tipo de usuario actualizado exitosamente!');
 }
+
+public function updateUtype(Request $request, $id)
+    {
+        $request->validate([
+            'utype' => 'required|in:USR,ADM'
+        ]);
+
+        $user = User::findOrFail($id);
+        $user->utype = $request->utype;
+        $user->save();
+
+        return redirect()->route('admin.users')->with('success', 'Rol actualizado correctamente.');
+    }
+
+    public function add_user()
+    {
+        return view('admin.create');
+    }
+
+     public function store(Request $request)
+    {
+        $data = $request->validate([
+        'name'     => 'required|string|max:255',
+        'email'    => 'required|email|unique:users,email',
+        'mobile'   => 'nullable|string|max:10',
+        'utype'    => 'required|in:USR,ADM',
+        'password' => 'required|min:8|confirmed',
+    ]);
+
+    // Crear y guardar el usuario correctamente
+    User::create([
+        'name'     => $data['name'],
+        'email'    => $data['email'],
+        'mobile'   => $data['mobile'],
+        'utype'    => $data['utype'],
+        'password' => Hash::make($data['password']),
+    ]);
+
+        return redirect()->route('admin.users')->with('success', 'Usuario creado correctamente.');
+    }
+
+    public function edit($id)
+    {
+        $user = User::findOrFail($id);
+        return view('admin.edit', compact('user'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $user = User::findOrFail($id);
+
+        $request->validate([
+            'name'   => 'required|string|max:255',
+            'email'  => 'required|email|unique:users,email,' . $user->id,
+            'mobile' => 'nullable|string|max:20',
+            'utype'  => 'required|in:USR,ADM',
+            'password' => 'nullable|min:6|confirmed',
+        ]);
+
+        $user->name   = $request->name;
+        $user->email  = $request->email;
+        $user->mobile = $request->mobile;
+        $user->utype  = $request->utype;
+
+        if ($request->filled('password')) {
+            $user->password = Hash::make($request->password);
+        }
+
+        $user->save();
+
+        return redirect()->route('admin.users')->with('success', 'Usuario actualizado correctamente.');
+    }
 }

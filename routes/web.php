@@ -11,6 +11,8 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\WishlistController;
 use App\Http\Controllers\ContactoController;
 use App\Http\Controllers\AboutController;
+use App\Http\Controllers\CondicionesController;
+use App\Http\Controllers\PoliticasController;
 
 
 Auth::routes();
@@ -42,12 +44,17 @@ Route::get('/order-confirmation',[CartController::class,'order_confirmation'])->
 Route::get('/contacto', [ContactoController::class, 'mostrar'])->name('contacto');
 Route::get('/nosotros', [AboutController::class, 'About'])->name('about');
 
+Route::get('/politicas', [PoliticasController::class, 'poli'])->name('condiciones');
+Route::get('/condiciones', [CondicionesController::class, 'terminos'])->name('terminos');
 
 Route::middleware(['auth'])->group(function(){
     Route::get('/account-dashboard',[UserController::class,'index'])->name('user.index');
     Route::get('/account-orders',[UserController::class,'orders'])->name('user.orders');
     Route::get('/account-order/{order_id}/details',[UserController::class,'order_details'])->name('user.order.details');
     Route::put('/account-order/cancel-order',[UserController::class,'order_cancel'])->name('user.order.cancel');
+
+    Route::get('/direccion-envio', [UserController::class, 'direccionEnvio'])->name('user.direccion');
+    
     
 });
 
@@ -87,7 +94,15 @@ Route::middleware(['auth',AuthAdmin::class])->group(function(){
     
     Route::get('/admin/users', [AdminController::class, 'users'])->name('admin.users');
     Route::delete('/admin/user/{id}/delete', [AdminController::class, 'user_delete'])->name('admin.user.delete');
-    Route::put('/admin/user/{id}/utype', [AdminController::class, 'user_update_utype'])->name('admin.user.update.utype');
+    Route::put('/admin/user/{id}/utype', [AdminController::class, 'updateUtype'])->name('admin.user.update.utype');
+
+
+    Route::get('/admin/create', [AdminController::class, 'add_user'])->name('admin.users.create');
+    Route::post('/admin/users/store', [AdminController::class, 'store'])->name('admin.user.store');
+    Route::get('/admin/users/{id}/edit', [AdminController::class, 'edit'])->name('admin.user.edit');
+    Route::put('/admin/users/{id}', [AdminController::class, 'update'])->name('admin.user.update');
+    
+   
 
 });
 

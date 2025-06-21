@@ -206,7 +206,7 @@
         <ul class="nav nav-tabs" id="myTab" role="tablist">
           <li class="nav-item" role="presentation">
             <a class="nav-link nav-link_underscore active" id="tab-description-tab" data-bs-toggle="tab"
-              href="#tab-description" role="tab" aria-controls="tab-description" aria-selected="true">Description</a>
+              href="#tab-description" role="tab" aria-controls="tab-description" aria-selected="true">Descripción</a>
           </li>
          <!-- <li class="nav-item" role="presentation">
             <a class="nav-link nav-link_underscore" id="tab-additional-info-tab" data-bs-toggle="tab"
@@ -380,7 +380,7 @@
       </div>
     </section>
     <section class="products-carousel container">
-      <h2 class="h3 text-uppercase mb-4 pb-xl-2 mb-xl-4">Related <strong>Products</strong></h2>
+      <h2 class="h3 text-uppercase mb-4 pb-xl-2 mb-xl-4">Productos <strong>Relacionados</strong></h2>
 
       <div id="related_products" class="position-relative">
         <div class="swiper-container js-swiper-slider" data-settings='{
