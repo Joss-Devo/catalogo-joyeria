@@ -54,7 +54,10 @@ Route::middleware(['auth'])->group(function(){
     Route::put('/account-order/cancel-order',[UserController::class,'order_cancel'])->name('user.order.cancel');
 
     Route::get('/direccion-envio', [UserController::class, 'direccionEnvio'])->name('user.direccion');
-    
+    Route::get('/user/create-dir', [UserController::class, 'create'])->name('user.account.addresses.create');
+    Route::post('/cuenta/direcciones', [UserController::class, 'store'])->name('user.account.addresses.store');
+
+    Route::get('/ped-recientes',[UserController::class,'order_reciente'])->name('user.order_recientes');
     
 });
 

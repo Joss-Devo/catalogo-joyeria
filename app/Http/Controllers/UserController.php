@@ -52,6 +52,45 @@ public function direccionEnvio()
 }
 
 
-    
+
+  public function create()
+    {
+        return view('user.create-dir');
+    }
+
+public function store(Request $request)
+{
+    $request->validate([
+        'name' => 'required',
+        'phone' => 'required|numeric',
+        'address' => 'required',
+        'city' => 'required',
+        'country' => 'required',
+        'zip' => 'required',
+    ]);
+
+    Order::create([
+        'user_id' => Auth::id(),
+        'name' => $request->name,
+        'phone' => $request->phone,
+        'address' => $request->address,
+        'city' => $request->city,
+        'country' => $request->country,
+        'zip' => $request->zip,
+    ]);
+
+    return redirect()->route('user.direccion-envio')->with('success', 'Dirección agregada correctamente.');
+}
+
+    public function order_reciente()
+{
+    $orders = Order::where('user_id', Auth::id())
+                   ->orderBy('created_at', 'desc')
+                   ->take(3)
+                   ->get();
+
+    return view('user.ped-recientes', compact('orders'));
+}
+
 
 }

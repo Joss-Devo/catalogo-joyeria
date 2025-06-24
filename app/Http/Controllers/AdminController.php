@@ -586,9 +586,11 @@ public function updateUtype(Request $request, $id)
         $data = $request->validate([
         'name'     => 'required|string|max:255',
         'email'    => 'required|email|unique:users,email',
-        'mobile'   => 'nullable|string|max:10',
+        'mobile'   => 'nullable|numeric|unique:users,mobile',
         'utype'    => 'required|in:USR,ADM',
         'password' => 'required|min:8|confirmed',
+        ], [
+    'mobile.unique' => 'El número de teléfono ya está registrado. Ingrese otro diferente.',
     ]);
 
     // Crear y guardar el usuario correctamente

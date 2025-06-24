@@ -13,6 +13,12 @@
     </div>
 @endif
 
+@if ($errors->has('mobile'))
+    <script>
+        alert("El número de teléfono ya está registrado. Por favor ingrese otro número.");
+    </script>
+@endif
+
 <div class="main-content-inner">
     <div class="main-content-wrap">
         <div class="flex items-center flex-wrap justify-between gap20 mb-27">
@@ -39,10 +45,10 @@
                 <div class="wg-filter flex-grow">
                     <form class="form-search">
                         <fieldset class="name">
-                            <!-- Input de búsqueda si lo necesitas -->
+                    
                         </fieldset>
                         <div class="button-submit">
-                            <!-- Botón buscar -->
+                            
                         </div>
                     </form>
                 </div>
@@ -76,7 +82,7 @@
                                         <div class="text-tiny mt-3">{{ strtoupper($user->role ?? 'USR') }}</div>
                                     </div>
                                 </td>
-                                <td>{{ $user->mobile }}</td>
+                                 <td>{{ $user->mobile }}</td>
                                 <td>{{ $user->email }}</td>
                                 <td>
                                     <!-- Editar utype -->
@@ -132,7 +138,6 @@
             if (confirmed) {
                 form.submit();
             } else {
-                // Restaurar el valor original
                 this.value = this.dataset.original;
             }
         });

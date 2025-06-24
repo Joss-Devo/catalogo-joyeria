@@ -1,6 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
+
+
 <div class="container pt-90">
     <h2 class="page-title">Mis Direcciones</h2>
 
@@ -12,7 +14,11 @@
         <div class="col-lg-10">
             <div class="wg-box">
                 <h5 class="mb-3">Direcciones guardadas</h5>
-
+                       <div class="d-flex justify-content-end mb-3">
+                      <a href="{{ route('user.account.addresses.create') }}" class="btn btn-primary">
+                       <i class="fas fa-plus"></i> Agregar nueva dirección
+                      </a>
+                      </div>
                 @if($orders->isEmpty())
                     <p>No tienes direcciones guardadas.</p>
                 @else
@@ -40,6 +46,8 @@
                                     </tr>
                                 @endforeach
                             </tbody>
+     
+
                         </table>
                     </div>
                 @endif

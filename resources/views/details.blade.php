@@ -27,9 +27,9 @@
               
                  @foreach (explode(',',$product->images) as $gimg )
                   <div class="swiper-slide product-single__image-item">
-                    <img loading="lazy" class="h-auto" src="{{asset('uploads/products')}}/{{$gimg }}" width="674"
+                    <img loading="lazy" class="h-auto" src="{{asset('uploads/products')}}/{{ $gimg }}" width="674"
                       height="674" alt="" />
-                    <a data-fancybox="gallery" href="{{asset('uploads/products')}}/{{$gimg }}" data-bs-toggle="tooltip"
+                    <a data-fancybox="gallery" href="{{asset('uploads/products')}}/{{ $gimg }}" data-bs-toggle="tooltip"
                       data-bs-placement="left" title="Zoom">
                       <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <use href="#icon_zoom" />
@@ -103,10 +103,10 @@
             <!--<span class="reviews-note text-lowercase text-secondary ms-1">8k+ reviews</span>-->
           </div>
           <div class="product-single__price">
-            <span class="current-price"> @if($product->sale_price)
-                    <s>${{$product->regular_price}}</s>${{$product->sale_price}}
+            <span class="current-price"> @if($product->regular_price <= $product->sale_price)
+                   ${{$product->sale_price}}
                     @else
-                    ${{$product->regular_price}}
+                    <s>${{$product->regular_price}}</s>${{$product->sale_price}}
                     @endif</span>
           </div>
           <div class="product-single__short-desc">
@@ -445,10 +445,10 @@
                 <h6 class="pc__title"><a href="{{ route('shop.product.details', ['product_slug' => $rproduct->slug]) }}">{{$rproduct->name}}</a></h6>
                 <div class="product-card__price d-flex">
                   <span class="money price">
-                  @if($product->sale_price)
-                    <s>${{$product->regular_price}}</s>${{$product->sale_price}}
+                   @if($rproduct->regular_price <= $rproduct->sale_price)
+                   ${{$product->sale_price}}
                     @else
-                    ${{$product->regular_price}}
+                    <s>${{$rproduct->regular_price}}</s>${{$rproduct->sale_price}}
                     @endif
                   </span>
                 </div>

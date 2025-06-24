@@ -221,8 +221,8 @@
                     }
                 });
                 $("#gFile").on("change",function(e){
-                    $(".gitems").remove();
-                    const gFile = $("#gFile");
+                    
+                    const photoInp = $("#gFile");
                     const gphotos = this.files;                    
                     $.each(gphotos,function(key,val){                        
                         $("#galUpload").prepend(`<div class="item gitems"><img src="${URL.createObjectURL(val)}" alt=""></div>`);                        

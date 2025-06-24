@@ -245,8 +245,8 @@
         .replace(/[^\w ]+/g, "")
         .replace(/ +/g, "-");
     }
-</script>
-@endpush  -->
+</script> -->
+@endpush  
 
 @push("scripts")
     <script>

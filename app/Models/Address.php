@@ -10,7 +10,7 @@ class Address extends Model
     use HasFactory;
 
     // Campos permitidos para asignación masiva
-    protected $fillable = [
+    protected $guarded = [
         'user_id',
         'name',
         'phone',
