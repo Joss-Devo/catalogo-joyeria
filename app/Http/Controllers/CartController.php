@@ -122,16 +122,34 @@ public function checkout()
     {
         return redirect()->route('login');
     }
-    $address = Address::where('user_id',Auth::user()->id)->where('isdefault',1)->first();              
-    return view('checkout',compact('address'));
+        
+    $addresses = Address::where('user_id', Auth::id())->get();          
+    return view('checkout',compact('addresses'));
 }
+
+
 
 public function place_an_order(Request $request)
 {
     $user_id = Auth::user()->id;
-    $address = Address::where('user_id',$user_id)->where('isdefault',true)->first();
-    if(!$address)
-    {
+    $this->setAmountForCheckout();
+    
+      $cartItems = Cart::instance('cart')->content();
+    if ($cartItems->isEmpty() || !Session::has('checkout') || Session::get('checkout')['subtotal'] <= 0) {
+        return redirect()->back()->with('error', 'No hay artículos seleccionados para realizar el pedido.');
+    }
+    
+    
+    if ($request->has('selected_address')) {
+        $address = Address::where('user_id', $user_id)
+                          ->where('id', $request->selected_address)
+                          ->first();
+
+        if (!$address) {
+            return back()->with('error', 'La dirección seleccionada no es válida.');
+        }
+    } else {
+        
         $request->validate([                
             'name' => 'required|max:100',
             'phone' => 'required|numeric|digits:10',
@@ -142,6 +160,8 @@ public function place_an_order(Request $request)
             'locality' => 'required',
             'landmark' => 'required',           
         ]);
+
+        
         $address = new Address();        
         $address->name = $request->name; 
         $address->phone = $request->phone;
@@ -156,9 +176,10 @@ public function place_an_order(Request $request)
         $address->isdefault = true;
         $address->save();
     }
-    
-    $this->setAmountForCheckout();
 
+    
+
+    
     $order = new Order();
     $order->user_id = $user_id;
     $order->subtotal = Session::get('checkout')['subtotal'];
@@ -176,6 +197,7 @@ public function place_an_order(Request $request)
     $order->zip = $address->zip;
     $order->save();   
 
+    
     foreach(Cart::instance('cart')->content() as $item)
     {
         $orderItem = new OrderItem();
@@ -185,40 +207,26 @@ public function place_an_order(Request $request)
         $orderItem->quantity = $item->qty;
         $orderItem->save();                   
     }
-    if($request->mode == "card")
-    {
-        //
+
+    
+    if ($request->mode == "cod") {
+        $transaction = new Transaction();
+        $transaction->user_id = $user_id;
+        $transaction->order_id = $order->id;
+        $transaction->mode = $request->mode;
+        $transaction->status = "pending";
+        $transaction->save();
     }
-    elseif($request->mode == "paypal")
-    {
-    $transaction = new Transaction();
-    $transaction->user_id = $user_id;
-    $transaction->order_id = $order->id;
-    $transaction->mode = $request->mode;
-    $transaction->status = "pending"; 
-    $transaction->save();
-    }
-    elseif($request->mode == "cod")
-    {
-    $transaction = new Transaction();
-    $transaction->user_id = $user_id;
-    $transaction->order_id = $order->id;
-    $transaction->mode = $request->mode;
-    $transaction->status = "pending";
-    $transaction->save();
-    }
+
+    
     Cart::instance('cart')->destroy();
     Session::forget('checkout');
     Session::forget('coupon');
     Session::forget('discounts');
-    Session::put('order_id',$order->id);
+    Session::put('order_id', $order->id);
 
-    if($request->mode === 'paypal') {
-    return redirect()->route('cart.pasarela')->withInput($request->all());
-    }
     return redirect()->route('cart.order.confirmation');
 }
-
 
 
 

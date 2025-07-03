@@ -103,11 +103,13 @@
             <!--<span class="reviews-note text-lowercase text-secondary ms-1">8k+ reviews</span>-->
           </div>
           <div class="product-single__price">
-            <span class="current-price"> @if($product->regular_price <= $product->sale_price)
-                   ${{$product->sale_price}}
-                    @else
-                    <s>${{$product->regular_price}}</s>${{$product->sale_price}}
-                    @endif</span>
+            <span class="current-price"> 
+               @if($product->sale_price == 0 || $product->sale_price >= $product->regular_price)
+                      ${{$product->regular_price}}
+                  @else
+                      <s>${{$product->regular_price}}</s> ${{$product->sale_price}}
+                  @endif
+                  </span>
           </div>
           <div class="product-single__short-desc">
             <p>{{$product->short_description}}</p>
@@ -434,7 +436,8 @@
             <input type="hidden" name="id" value="{{$rproduct->id}}"/>
             <input type="hidden" name="quantity" value="1"/>
               <input type="hidden" name="name" value="{{$rproduct->name}}"/>
-              <input type="hidden" name="price" value="{{$rproduct->sale_price == ''? $rproduct->regular_price : $rproduct->sale_price}}"/>
+              <input type="hidden" name="price" value="{{ ($product->sale_price && $product->sale_price != 0) ? $product->sale_price : $product->regular_price }}"/>
+
                 <button type="submit"class="pc__atc btn anim_appear-bottom btn position-absolute border-0 text-uppercase fw-medium" data-aside="cartDrawer" title="Add To Cart">Agregar al Carrito</button>
           </form>
                 @endif  
@@ -445,7 +448,7 @@
                 <h6 class="pc__title"><a href="{{ route('shop.product.details', ['product_slug' => $rproduct->slug]) }}">{{$rproduct->name}}</a></h6>
                 <div class="product-card__price d-flex">
                   <span class="money price">
-                   @if($rproduct->regular_price <= $rproduct->sale_price)
+                   @if($rproduct->regular_price <= $product->sale_price)
                    ${{$product->sale_price}}
                     @else
                     <s>${{$rproduct->regular_price}}</s>${{$rproduct->sale_price}}

@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 @section('content')
 
-<div class="main-content-inner">
+<div class="main-content-inner" style="overflow:auto; max-height:90vh;">
     <!-- main-content-wrap -->
     <div class="main-content-wrap">
         <div class="flex items-center flex-wrap justify-between gap20 mb-27">
@@ -127,13 +127,17 @@
                 <fieldset>
                     <div class="body-title mb-10">Upload Gallery Images</div>
                     <div class="upload-image mb-16">
+                        <!-- Alerta solo si no hay imágenes seleccionadas en el input de galería -->
+                        <div id="gallery-alert" class="alert alert-warning text-center mb-2" style="display:none;">
+                            Debes agregar al menos una imagen a la galería.
+                        </div>
                         @if($product->images)
                         @foreach (explode(',',$product->images) as $img)
                         <div class="item gitems">
-                                <img src="{{asset('uploads/products')}}/{{trim($img)}}" alt="">
-                            </div>     
-                            @endforeach
-                            @endif                                            
+                            <img src="{{asset('uploads/products')}}/{{trim($img)}}" alt="">
+                        </div>
+                        @endforeach
+                        @endif
                         <div id="galUpload" class="item up-load">
                             <label class="uploadfile" for="gFile">
                                 <span class="icon">
@@ -217,65 +221,143 @@
 </div>
 @endsection
 
-<!-- @push('scripts')
+
+
+@push("scripts")
 <script>
-    $(function(){
-        $("#myFile").on("change", function(e){
+    $(function () {
+        // Imagen principal
+        $("#myFile").on("change", function (e) {
             const [file] = this.files;
-            if(file) {
+            if (file) {
                 $("#imgpreview img").attr('src', URL.createObjectURL(file));
                 $("#imgpreview").show();
             }
         });
 
-        $("#gFile").on("change", function(e){
-            const gphotos = this.files;
-            $.each(gphotos, function(key, val) {
-                $("#galUpload").parent('<div class="item gitems"><img src="' + URL.createObjectURL(val) + '"/></div>');
-            });
+        // Galería avanzada
+        let galleryFiles = [];
+
+        // OCULTAR archivos existentes de la galería al cargar la página
+        $(".gitems").each(function(){
+            if(!$(this).hasClass('new')) {
+                $(this).hide();
+            }
         });
 
-        $("input[name='name']").on("change", function(){
+        // Agrega la X para eliminar en imágenes existentes de la galería
+        $(".gitems").each(function(){
+            if(!$(this).hasClass('new')) {
+                const $img = $(this).find('img');
+                // Asegura que la imagen tenga src absoluto solo si es relativo
+                if ($img.length && !$img.attr('src').startsWith('http') && !$img.attr('src').startsWith(window.location.origin)) {
+                    $img.attr('src', "{{ asset('uploads/products') }}/" + $img.attr('src').split('/').pop());
+                }
+                const imgName = $img.attr('src').split('/').pop();
+                $(this).addClass('existing').attr('data-img', imgName);
+                if($(this).find('.remove-image').length === 0) {
+                    $(this).append(`<span class="remove-image" style="
+                        position: absolute;
+                        top: 5px;
+                        right: 5px;
+                        background: rgba(0,0,0,0.5);
+                        color: white;
+                        padding: 2px 6px;
+                        border-radius: 50%;
+                        cursor: pointer;
+                        font-size: 14px;
+                        line-height: 1;
+                    ">&times;</span>`);
+                    $(this).css('position', 'relative');
+                }
+            }
+        });
+
+        // Eliminar imágenes existentes de la galería (del producto)
+        $(document).on('click', '.gitems.existing .remove-image', function () {
+            const imgName = $(this).closest('.gitems').data('img');
+            $('<input>').attr({
+                type: 'hidden',
+                name: 'delete_gallery_images[]',
+                value: imgName
+            }).appendTo('form.form-add-product');
+            $(this).closest('.gitems').remove();
+        });
+
+        $("#gFile").on("change", function (e) {
+            galleryFiles = [];
+            for (let i = 0; i < this.files.length; i++) {
+                galleryFiles.push(this.files[i]);
+            }
+            renderGallery();
+            this.value = "";
+            // Oculta la alerta si hay imágenes seleccionadas
+            if (galleryFiles.length > 0) {
+                $("#gallery-alert").hide();
+            }
+        });
+
+        function renderGallery() {
+            $("#galUpload .gitems.new").remove();
+            galleryFiles.forEach(function(file, idx) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    const imgHtml = `
+                        <div class="item gitems new position-relative" data-idx="${idx}">
+                            <img src="${e.target.result}" alt="" />
+                            <span class="remove-image" style="
+                                position: absolute;
+                                top: 5px;
+                                right: 5px;
+                                background: rgba(0,0,0,0.5);
+                                color: white;
+                                padding: 2px 6px;
+                                border-radius: 50%;
+                                cursor: pointer;
+                                font-size: 14px;
+                                line-height: 1;
+                            ">&times;</span>
+                        </div>
+                        <input type="hidden" name="gallery_indexes[]" value="${idx}" class="gallery-index" />
+                    `;
+                    $("#galUpload").append(imgHtml);
+                };
+                reader.readAsDataURL(file);
+            });
+        }
+
+        // Eliminar imagen de la galería (solo nuevas)
+        $(document).on('click', '.gitems.new .remove-image', function () {
+            const idx = $(this).closest('.gitems').data('idx');
+            galleryFiles.splice(idx, 1);
+            renderGallery();
+        });
+
+        // Antes de enviar el formulario, valida si hay imágenes en la galería
+        $("form.form-add-product").on("submit", function(e) {
+            if (galleryFiles.length === 0 && $(".gitems:visible").length === 0) {
+                $("#gallery-alert").show();
+                e.preventDefault();
+                return false;
+            }
+            // Crear un nuevo input file dinámico
+            const dt = new DataTransfer();
+            galleryFiles.forEach(function(file) {
+                dt.items.add(file);
+            });
+            $("#gFile")[0].files = dt.files;
+        });
+
+        // Autogenerar slug
+        $("input[name='name']").on("change", function () {
             $("input[name='slug']").val(StringToSlug($(this).val()));
-        }); 
+        });
     });
 
     function StringToSlug(Text) {
         return Text.toLowerCase()
-        .replace(/[^\w ]+/g, "")
-        .replace(/ +/g, "-");
+            .replace(/[^\w ]+/g, "")
+            .replace(/ +/g, "-");
     }
-</script> -->
-@endpush  
-
-@push("scripts")
-    <script>
-            $(function(){
-                $("#myFile").on("change",function(e){
-                    const photoInp = $("#myFile");                    
-                    const [file] = this.files;
-                    if (file) {
-                        $("#imgpreview img").attr('src',URL.createObjectURL(file));
-                        $("#imgpreview").show();                        
-                    }
-                });
-                $("#gFile").on("change",function(e){
-                    $(".gitems").remove();
-                    const gFile = $("#gFile");
-                    const gphotos = this.files;                    
-                    $.each(gphotos,function(key,val){                        
-                        $("#galUpload").append(`<div class="item gitems"><img src="${URL.createObjectURL(val)}" alt=""></div>`);                        
-                    });                    
-                });
-                $("input[name='name']").on("change",function(){
-                    $("input[name='slug']").val(StringToSlug($(this).val()));
-                });
-                
-            });
-            function StringToSlug(Text) {
-                return Text.toLowerCase()
-                .replace(/[^\w ]+/g, "")
-                .replace(/ +/g, "-");
-            }      
-    </script>
+</script>
 @endpush

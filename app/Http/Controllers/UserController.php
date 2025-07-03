@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\Order;
+use App\Models\Address;
 use App\Models\OrderItem;
 use App\Models\Transaction;
 use Carbon\Carbon;
@@ -47,8 +48,8 @@ public function order_cancel(Request $request)
 
 public function direccionEnvio()
 {
-    $orders = Order::where('user_id', Auth::id())->get();
-    return view('user.direccion-envio', compact('orders'));
+     $addresses = Address::where('user_id', Auth::id())->get(); 
+    return view('user.direccion-envio', compact('addresses'));
 }
 
 
@@ -60,26 +61,42 @@ public function direccionEnvio()
 
 public function store(Request $request)
 {
+    $user_id = Auth::user()->id;
     $request->validate([
-        'name' => 'required',
-        'phone' => 'required|numeric',
-        'address' => 'required',
-        'city' => 'required',
-        'country' => 'required',
-        'zip' => 'required',
+         'name' => 'required|max:100',
+            'phone' => 'required|numeric|digits:10',
+            'zip' => 'required|numeric|digits:5',
+            'state' => 'required',
+            'city' => 'required',
+            'address' => 'required',
+            'locality' => 'required',
+            'landmark' => 'required', 
     ]);
 
-    Order::create([
-        'user_id' => Auth::id(),
-        'name' => $request->name,
-        'phone' => $request->phone,
-        'address' => $request->address,
-        'city' => $request->city,
-        'country' => $request->country,
-        'zip' => $request->zip,
-    ]);
+    $address = new Address();
+        $address->name = $request->name; 
+        $address->phone = $request->phone;
+        $address->zip = $request->zip;
+        $address->state = $request->state;
+        $address->city = $request->city;
+        $address->address = $request->address;
+        $address->locality = $request->locality;
+        $address->landmark = $request->landmark;
+        $address->country = 'México';
+        $address->user_id = $user_id;
+        $address->isdefault = true;
+        $address->save();
+    
 
-    return redirect()->route('user.direccion-envio')->with('success', 'Dirección agregada correctamente.');
+    return redirect()->route('user.direccion')->with('success', 'Dirección agregada correctamente.');
+}
+
+public function destroy($id)
+{
+    $address = Address::where('user_id', Auth::id())->where('id', $id)->firstOrFail();
+    $address->delete();
+
+    return redirect()->route('user.direccion')->with('success', 'Dirección eliminada correctamente.');
 }
 
     public function order_reciente()

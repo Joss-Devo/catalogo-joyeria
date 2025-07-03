@@ -30,6 +30,13 @@
       <form name="checkout-form" action="{{route('cart.place.an.order')}}" method="POST">
         @csrf
         <div class="checkout-form"> 
+
+        @if (session('error'))
+    <div class="alert alert-danger">
+        {{ session('error') }}
+    </div>
+@endif
+
           <div class="billing-info__wrapper">
             <div class="row">
               <div class="col-6">
@@ -38,24 +45,23 @@
 
             </div>
 
-            @if($address)
-            <div class="row">
-                        <div class="col-md-12">
-                            <div class="my-account__address-list">
-                                <div class="my-account__address-list-item">                                    
-                                    <div class="my-account__address-item__detail">
-                                        <p>{{$address->name}}</p>
-                                        <p>{{$address->address}}</p>
-                                        <p>{{$address->landmark}}</p>
-                                        <p>{{$address->city}}, {{$address->state}}, {{$address->country}}</p>
-                                        <p>{{$address->zip}}</p>
-                                        <br/>
-                                        <p>{{$address->phone}}</p>                                        
-                                    </div>
-                                </div>                                
-                            </div>
-                        </div>
-                    </div>
+          @if ($addresses->isNotEmpty())
+    @foreach ($addresses as $address)
+        <div class="form-check mb-3">
+            <input class="form-check-input" type="radio" name="selected_address" id="address_{{ $address->id }}" value="{{ $address->id }}" required>
+            <label class="form-check-label" for="address_{{ $address->id }}">
+                <strong>{{ $address->name }}</strong><br>
+                {{ $address->address }}, {{ $address->locality }}<br>
+                {{ $address->city }}, {{ $address->state }}<br>
+                {{ $address->country }} - CP {{ $address->zip }}<br>
+                Tel: {{ $address->phone }}
+            </label>
+        </div>
+    @endforeach
+
+
+
+             
             @else
             <div class="row mt-5">
               <div class="col-md-6">
@@ -129,7 +135,7 @@
                     </tr>
                   </thead>
                   <tbody>
-                  @foreach (Cart::instance('cart') as $item)
+                  @foreach (Cart::instance('cart')->content() as $item)
                     <tr>
                       <td>
                       {{$item->name}} x {{$item->qty}}
@@ -196,32 +202,63 @@
               <div class="checkout__payment-methods">
                 
                 
-                 <div class="form-check">
-          <!--        <input class="form-check-input form-check-input_fill" type="radio" name="mode" id="mode2" value="paypal">
-                  <label class="form-check-label" for="mode2">
-                    Paypal
-                    
-                  </label>-->
-                </div>
-                <div class="form-check">
-               <input class="form-check-input form-check-input_fill" type="radio" name="mode" id="mode3" value="cod">
-                  <label class="form-check-label" for="mode3">
-                    Pago contra Entrega
-                   
-                  </label>
-                </div>
+                 <input type="hidden" name="mode" value="cod">
+                <p><strong>Método de pago:</strong> Pago contra entrega</p>
+
                
+
                 <div class="policy-text">
                  Tus datos personales se utilizarán para procesar tu pedido, respaldar tu experiencia en este sitio web y para otros fines descritos en nuestra <a href="terms.html" target="_blank">politicas de privacidad</a>.
                 </div>
               </div>
+              
+
               <button type="submit" class="btn btn-primary btn-checkout" id="submit-order" >REALIZAR PEDIDO</button>
+    <script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const form = document.querySelector('form[name="checkout-form"]');
+    const submitBtn = document.getElementById('submit-order');
+
+    let direccionSeleccionada = false;
+
+    submitBtn.addEventListener('click', function (e) {
+      const radios = document.querySelectorAll('input[name="selected_address"]');
+      const anyChecked = Array.from(radios).some(r => r.checked);
+
+      if (radios.length > 0 && !anyChecked) {
+        e.preventDefault(); // Detiene el envío
+        direccionSeleccionada = false;
+        alert('Por favor selecciona una dirección de envío.');
+      } else {
+        direccionSeleccionada = true;
+      }
+
+      // Si ya seleccionó y vuelve a hacer clic, se permite el envío
+      if (!direccionSeleccionada) {
+        e.preventDefault();
+      }
+    });
+
+    // Escuchar cambio en las opciones para resetear el flag
+    document.querySelectorAll('input[name="selected_address"]').forEach(radio => {
+      radio.addEventListener('change', function () {
+        direccionSeleccionada = true;
+      });
+    });
+  });
+</script>
             </div>
           </div>
         </div>
       </form>
     </section>
+    
   </main>
-@endsection 
+
+
+@endsection
+
+
+
 
 

@@ -234,7 +234,7 @@ public function brand_update(Request $request)
         return view ('admin.product-add',compact('categories','brands'));
     }
 
-    public function product_store(Request $request)
+   public function product_store(Request $request)
     {
         $request->validate([
         'name' =>'required',
@@ -250,7 +250,10 @@ public function brand_update(Request $request)
         'image' =>'required|mimes:png,jpg,jpeg|max:2048',
         'category_id'=>'required',
         'brand_id'=>'required'
+        ], [
+    'image.required' => 'No ha agregado la imagen principal del producto.',
     ]);
+    
 
         $product = new Product();
         $product->name = $request->name;
@@ -302,7 +305,7 @@ public function brand_update(Request $request)
         $product->images = $gallery_images;
         $product->save();
         return redirect()->route('admin.products')->with('status','El producto ha sido agregado exitosamente!');
-    }
+    } 
 
     public function GenerateProductThumbnailImage($image, $imageName)
     {
@@ -593,7 +596,7 @@ public function updateUtype(Request $request, $id)
     'mobile.unique' => 'El número de teléfono ya está registrado. Ingrese otro diferente.',
     ]);
 
-    // Crear y guardar el usuario correctamente
+    
     User::create([
         'name'     => $data['name'],
         'email'    => $data['email'],

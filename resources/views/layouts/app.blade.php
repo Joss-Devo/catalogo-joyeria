@@ -681,6 +681,8 @@
   <script src="{{ asset('assets/js/plugins/countdown.js') }}"></script>
   <script src="{{ asset('assets/js/theme.js') }}"></script>
   @stack("scripts")
+  
+  
 </body>
 
 </html>

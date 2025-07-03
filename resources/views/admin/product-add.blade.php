@@ -53,14 +53,15 @@
                         <div class="body-title mb-10">Categoría <span class="tf-color-1">*</span>
                         </div>
                         <div class="select">
-                            <select class="" name="category_id">
+                            <select class="" name="category_id" id="category_id">
                                 <option>Elige una categoría</option>
                                 @foreach ($categories as $category )
                                 <option value="{{$category->id}}">{{$category->name}}</option>
                                 @endforeach
-
-
                             </select>
+                        </div>
+                        <div id="category-alert" class="alert alert-warning text-center mb-2" style="display:none;">
+                            Debes seleccionar una categoría.
                         </div>
                     </fieldset>
                     @error('category_id') <span class="alert alert-danger text-center">{{$message}} @enderror
@@ -68,12 +69,15 @@
                         <div class="body-title mb-10">Marca <span class="tf-color-1">*</span>
                         </div>
                         <div class="select">
-                            <select class="" name="brand_id">
+                            <select class="" name="brand_id" id="brand_id">
                                 <option>Elige una marca</option>
                                 @foreach ($brands as $brand )
                                 <option value="{{$brand->id}}">{{$brand->name}}</option>
                                 @endforeach
                             </select>
+                        </div>
+                        <div id="brand-alert" class="alert alert-warning text-center mb-2" style="display:none;">
+                            Debes seleccionar una marca.
                         </div>
                     </fieldset>
                     @error('brand_id') <span class="alert alert-danger text-center">{{$message}} @enderror
@@ -101,7 +105,6 @@
                     <div class="body-title">Cargar imagen <span class="tf-color-1">*</span>
                     </div>
                     <div class="upload-image flex-grow">
-                        
                         <div class="item" id="imgpreview" style="display:none">
                             <img src="../../../localhost_8000/images/upload/upload-1.png" class="effect8" alt="">
                         </div>
@@ -111,7 +114,6 @@
                                     <i class="icon-upload-cloud"></i>
                                 </span>
                                 <span class="body-text">Seleciona tus imagenes <span class="tf-color">Haz clic para buscar</span></span>
-
                                 <input type="file" id="myFile" name="image" accept="image/*">
                             </label>
                         </div>
@@ -122,6 +124,10 @@
                 <fieldset>
                     <div class="body-title mb-10">Subir imágenes para la galería</div>
                     <div class="upload-image mb-16">
+                        <!-- Alerta solo si no hay imágenes seleccionadas en el input de galería -->
+                        <div id="gallery-alert" class="alert alert-warning text-center mb-2" style="display:none;">
+                            Debes agregar al menos una imagen a la galería.
+                        </div>
                         <!-- <div class="item">
                                 <img src="images/upload/upload-1.png" alt="">
                             </div>                                                 -->
@@ -137,7 +143,6 @@
                         </div>
                     </div>
                 </fieldset>
-
                 @error('images') <span class="alert alert-danger text-center">{{$message}} @enderror
                 <div class="cols gap22">
                     <fieldset class="name">
@@ -209,7 +214,7 @@
 @endsection
 
 
-@push("scripts")
+<!--@push("scripts")
     <script>
             $(function(){
                 $("#myFile").on("change",function(e){
@@ -239,5 +244,119 @@
                 .replace(/ +/g, "-");
             }      
     </script>
-@endpush
+@endpush -->
+@push("scripts")
+<script>
+    $(function () {
+        // Imagen principal
+        $("#myFile").on("change", function (e) {
+            const [file] = this.files;
+            if (file) {
+                $("#imgpreview img").attr('src', URL.createObjectURL(file));
+                $("#imgpreview").show();
+            }
+        });
 
+        // Galería avanzada
+        let galleryFiles = [];
+
+        $("#gFile").on("change", function (e) {
+            galleryFiles = [];
+            for (let i = 0; i < this.files.length; i++) {
+                galleryFiles.push(this.files[i]);
+            }
+            renderGallery();
+            this.value = "";
+            // Oculta la alerta si hay imágenes seleccionadas
+            if (galleryFiles.length > 0) {
+                $("#gallery-alert").hide();
+            }
+        });
+
+        function renderGallery() {
+            $("#galUpload .gitems").remove();
+            galleryFiles.forEach(function(file, idx) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    const imgHtml = `
+                        <div class="item gitems position-relative" data-idx="${idx}">
+                            <img src="${e.target.result}" alt="" />
+                            <span class="remove-image" style="
+                                position: absolute;
+                                top: 5px;
+                                right: 5px;
+                                background: rgba(0,0,0,0.5);
+                                color: white;
+                                padding: 2px 6px;
+                                border-radius: 50%;
+                                cursor: pointer;
+                                font-size: 14px;
+                                line-height: 1;
+                            ">&times;</span>
+                        </div>
+                        <input type="hidden" name="gallery_indexes[]" value="${idx}" class="gallery-index" />
+                    `;
+                    $("#galUpload").append(imgHtml);
+                };
+                reader.readAsDataURL(file);
+            });
+        }
+
+        // Eliminar imagen de la galería
+        $(document).on('click', '.remove-image', function () {
+            const idx = $(this).closest('.gitems').data('idx');
+            galleryFiles.splice(idx, 1);
+            renderGallery();
+        });
+
+        // Antes de enviar el formulario, valida si hay imágenes en la galería
+        $("form.form-add-product").on("submit", function(e) {
+            let valid = true;
+            // Categoría
+            if ($("#category_id").val() === "Elige una categoría" || !$("#category_id").val()) {
+                $("#category-alert").show();
+                valid = false;
+            } else {
+                $("#category-alert").hide();
+            }
+            // Marca
+            if ($("#brand_id").val() === "Elige una marca" || !$("#brand_id").val()) {
+                $("#brand-alert").show();
+                valid = false;
+            } else {
+                $("#brand-alert").hide();
+            }
+            // Galería
+            if (galleryFiles.length === 0) {
+                $("#gallery-alert").show();
+                valid = false;
+            } else {
+                $("#gallery-alert").hide();
+            }
+            if (!valid) {
+                e.preventDefault();
+                return false;
+            }
+            // Crear un nuevo input file dinámico
+            const dt = new DataTransfer();
+            galleryFiles.forEach(function(file) {
+                dt.items.add(file);
+            });
+            // Reemplazar el input original por uno nuevo solo con los archivos seleccionados
+            const $gFile = $("#gFile");
+            $gFile[0].files = dt.files;
+        });
+
+        // Autogenerar slug
+        $("input[name='name']").on("change", function () {
+            $("input[name='slug']").val(StringToSlug($(this).val()));
+        });
+    });
+
+    function StringToSlug(Text) {
+        return Text.toLowerCase()
+            .replace(/[^\w ]+/g, "")
+            .replace(/ +/g, "-");
+    }
+</script>
+@endpush

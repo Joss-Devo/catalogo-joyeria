@@ -366,11 +366,14 @@
                 <h6 class="pc__title"><a href="{{ route('shop.product.details', ['product_slug' => $product->slug]) }}">{{$product->name}}</a></h6>
                 <div class="product-card__price d-flex">
                   <span class="money price">
-                    @if($product->regular_price <= $product->sale_price)
-                   ${{$product->sale_price}}
-                    @else
-                    <s>${{$product->regular_price}}</s>${{$product->sale_price}}
-                    @endif
+                  @if($product->sale_price == 0 || $product->sale_price >= $product->regular_price)
+                      ${{$product->regular_price}}
+                  @else
+                      <s>${{$product->regular_price}}</s> ${{$product->sale_price}}
+                  @endif
+
+
+
                   </span>
                 </div>
             <!--    <div class="product-card__review d-flex align-items-center">
