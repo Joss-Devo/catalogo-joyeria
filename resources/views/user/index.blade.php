@@ -11,7 +11,7 @@
         <div class="col-lg-9">
           <div class="page-content my-account__dashboard">
             <p>Hola <strong>{{Auth::user()->name}}</strong></p>
-            <p>Desde el panel de tu cuenta puedes ver tu <a class="unerline-link" href="{{route('user.order_recientes')}}">pedidos recientes</a>, gestionar tus <a class="unerline-link" href="{{route('user.direccion')}}">dirección de envío</a>, y <a class="unerline-link" href="account_edit.html"></a></p>
+            <p>Desde el panel de tu cuenta puedes ver tu <a class="unerline-link" href="{{route('user.order_recientes')}}">pedidos recientes</a>, gestionar tu <a class="unerline-link" href="{{route('user.direccion')}}">dirección de envío</a>. <a class="unerline-link" href="account_edit.html"></a></p>
           </div>
         </div>
       </div>

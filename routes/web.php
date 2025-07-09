@@ -56,6 +56,8 @@ Route::middleware(['auth'])->group(function(){
     Route::get('/direccion-envio', [UserController::class, 'direccionEnvio'])->name('user.direccion');
     Route::get('/user/create-dir', [UserController::class, 'create'])->name('user.account.addresses.create');
     Route::post('/user/direcciones', [UserController::class, 'store'])->name('user.account.addresses.store');
+    Route::get('/user/direcciones/{id}/editar', [UserController::class, 'edit'])->name('addresses.edit');
+    Route::put('/user/direccion/envio/{id}', [UserController::class, 'update'])->name('addresses.update');
     Route::delete('/user/addresses/{id}', [UserController::class, 'destroy'])->name('user.account.addresses.destroy');
 
     Route::get('/ped-recientes',[UserController::class,'order_reciente'])->name('user.order_recientes');

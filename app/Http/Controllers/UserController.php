@@ -99,6 +99,51 @@ public function destroy($id)
     return redirect()->route('user.direccion')->with('success', 'Dirección eliminada correctamente.');
 }
 
+public function edit($id)
+{
+    $address = Address::findOrFail($id);
+
+    // Si quieres asegurar que el usuario solo edite sus propias direcciones:
+    if ($address->user_id !== auth::id()) {
+        abort(403, 'No autorizado.');
+    }
+
+    return view('user.edit-direc', compact('address'));
+}
+
+public function update(Request $request, $id)
+{
+    $request->validate([
+        'name' => 'required|string|max:255',
+        'phone' => 'required|string|max:20',
+        'zip' => 'required|string|max:10',
+        'state' => 'required|string|max:100',
+        'city' => 'required|string|max:100',
+        'address' => 'required|string|max:255',
+        'locality' => 'required|string|max:255',
+        'landmark' => 'required|string|max:255',
+    ]);
+
+    $address = Address::findOrFail($id);
+
+    if ($address->user_id !== auth::id()) {
+        abort(403, 'No autorizado.');
+    }
+
+    $address->update([
+        'name' => $request->name,
+        'phone' => $request->phone,
+        'zip' => $request->zip,
+        'state' => $request->state,
+        'city' => $request->city,
+        'address' => $request->address,
+        'locality' => $request->locality,
+        'landmark' => $request->landmark,
+    ]);
+
+    return redirect()->route('user.direccion')->with('success', 'Dirección actualizada correctamente.');
+}
+
     public function order_reciente()
 {
     $orders = Order::where('user_id', Auth::id())
